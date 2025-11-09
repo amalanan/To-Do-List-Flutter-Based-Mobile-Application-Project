@@ -19,6 +19,7 @@ class CustomTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 40),
       child: TextFormField(
+        //text form field to validate the fields
         style: TextStyle(fontSize: 20, color: Colors.black),
         validator: validate,
         controller: fieldController,

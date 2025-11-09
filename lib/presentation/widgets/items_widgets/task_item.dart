@@ -1,6 +1,6 @@
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-import '../../imports.dart';
+import '../../../imports.dart';
 
 class TaskItem extends StatelessWidget {
   const TaskItem({
@@ -55,9 +55,10 @@ class TaskItem extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
-                      decoration: taskModel.taskCompleted
-                          ? TextDecoration.lineThrough
-                          : TextDecoration.none,
+                      decoration:
+                          taskModel.taskCompleted
+                              ? TextDecoration.lineThrough
+                              : TextDecoration.none,
                       decorationColor: Colors.blueGrey.shade200,
                       decorationThickness: 2,
                     ),

@@ -7,7 +7,7 @@ class LogoutIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        showLogoutDialog(context);
+        showLogoutDialog(context); //show the logout dialog
       },
       child: Icon(Icons.logout, size: 36, color: Colors.blueGrey.shade200),
     );

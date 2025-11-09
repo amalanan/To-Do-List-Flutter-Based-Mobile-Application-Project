@@ -3,41 +3,51 @@
 import '../../../imports.dart';
 
 class MainNavigationScreen extends StatefulWidget {
-  MainNavigationScreen({super.key});
+  const MainNavigationScreen({super.key});
 
   @override
   State<MainNavigationScreen> createState() => _MainNavigationScreenState();
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int currentIndex = 0;
+  int currentIndex = 0; // controls the index of the current screen
 
   List screens = [
+    //list of screens
     DashboardScreen(),
-    const TasksScreen(),
-     CreateEditScreen(),
-     ProfileScreen(),
+    TasksScreen(),
+    CreateEditScreen(),
+    ProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[currentIndex],
+      body: screens[currentIndex], // the current screen
       backgroundColor: Colors.blueGrey.shade200,
       bottomNavigationBar: BottomNavigationBar(
+        // bottom navigation bar
         currentIndex: currentIndex,
+        // the current index of the screen
         selectedItemColor: Colors.blueGrey.shade700,
+        // the selected item color
         unselectedItemColor: Colors.grey,
+        //the unselected item color
         onTap: (value) {
           setState(() {
+            // changing the state of the screen
             currentIndex = value;
           });
         },
         items: [
           BottomNavigationBarItem(
-            label: "Home",
-            icon: Icon(Icons.home, size: 40),
-            activeIcon: Icon(Icons.home_filled, size: 40),
+            // bottom navigation bar items
+            label: "Home", // the label of the item
+            icon: Icon(Icons.home, size: 40), // the icon of the item
+            activeIcon: Icon(
+              Icons.home_filled,
+              size: 40,
+            ), // the active icon of the item
           ),
           BottomNavigationBarItem(
             label: "Tasks",

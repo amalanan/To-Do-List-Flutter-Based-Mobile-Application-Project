@@ -1,11 +1,48 @@
-import 'package:device_preview/device_preview.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'imports.dart';
 
 void main() async {
+  // making sure that the flutter engine is ready before running the application
+  // it's very important for the SharedPreferences , DataBase  and for any async processes before running the app runApp
   WidgetsFlutterBinding.ensureInitialized();
+  await TasksSqliteDb.init(); // initializing the database
+  await printAllUsersAndTasks(); // printing all users and tasks
+  //await clearAllDataOnce();  // clearing all the app data
+  runApp(MyApp()); //running the app
+}
 
-  runApp(DevicePreview(enabled: false, builder: (context) => MyApp()));
+// print all users and their tasks
+Future<void> printAllUsersAndTasks() async {
+  final users = await TasksSqliteDb.getUsers();
+  print(
+    'All Users',
+  ); //printing all users saved in the shared preferences (session service)
+  for (var user in users) {
+    print(
+      'User ID: ${user.id}, Name: ${user.firstName} ${user.lastName}, Email: ${user.email}',
+    );
+  }
+  print('All Tasks'); //printing all tasks saved in the database (sqlite)
+  for (var user in users) {
+    final tasks = await TasksSqliteDb.getTasksForUser(user.id);
+    print('tasks of  User ${user.id}:');
+    for (var task in tasks) {
+      print(
+        'Task ID: ${task.id}, Name: ${task.taskName}, Completed: ${task.taskCompleted}',
+      );
+    }
+  }
+}
+
+Future<void> clearAllDataOnce() async {
+  // deleting the Database(SQlite) by clearing the tables (tasks & users)
+  await TasksSqliteDb.clearAllTables();
+
+  //deleting the Shared Preferences (Session Service) (saved users)
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.clear();
+  print('All Data  has been deleted');
 }
 
 class MyApp extends StatelessWidget {
@@ -13,96 +50,40 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      useInheritedMediaQuery: true,
-      debugShowCheckedModeBanner: false,
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
-      theme: ThemeData(
-        textTheme: GoogleFonts.montserratTextTheme(),
+    return MultiBlocProvider(
+      // for the cubit state management
+      // (calling the cubits and putting them above the main app)
+      providers: [
+        // auth cubit for login, signup, logouts functionalities
+        BlocProvider<AuthCubit>(create: (_) => AuthCubit()..tryAutoLogin()),
+        //tasks cubit  for tasks management functionalities
+        BlocProvider<TaskCubit>(create: (_) => TaskCubit()),
+      ],
+      child: BlocBuilder<AuthCubit, AuthState>(
+        //bloc builder for the authentication cubit
+        // to be above the main app cuz it's the first thing called when running the app
+        builder: (context, authState) {
+          //builder cuz we want to build a UI each time( it requires changing in the UI)
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(textTheme: GoogleFonts.montserratTextTheme()),
+            //theme of the app (font family)
+            initialRoute: Routes.splash,
+            //initial route of the app
+            routes: {
+              //routes of the app
+              Routes.splash: (_) => const SplashPage(),
+              Routes.login: (_) => const LoginScreen(),
+              Routes.signup: (_) => SignUp(),
+              Routes.home: (_) => MainNavigationScreen(),
+              Routes.tasks: (_) => TasksScreen(),
+              Routes.profile: (_) => ProfileScreen(),
+              Routes.createEdit: (_) => CreateEditScreen(),
+              Routes.dashboard: (_) => DashboardScreen(),
+            },
+          );
+        },
       ),
-      initialRoute: Routes.splash,
-      routes: {
-        Routes.splash: (_) => const SplashPage(),
-        Routes.login: (_) => const LoginScreen(),
-        Routes.signup: (_) => SignUp(),
-        Routes.home: (_) => MainNavigationScreen(),
-        Routes.tasks: (_) => TasksScreen(),
-        Routes.profile: (_) => ProfileScreen(),
-        Routes.createEdit: (_) => CreateEditScreen(),
-        Routes.dashboard: (_) => DashboardScreen(),
-      },
     );
   }
 }
-
-// SharedPreferences  عشان نحدد شاشة البداية
-/* final prefs = await SharedPreferences.getInstance();
-  final hasLoggedIn = prefs.getBool(LoginScreen.userCredentialsKey) ?? false;
-  final initialRoute = hasLoggedIn ? Routes.home : Routes.splash;
-*/
-
-//A
-/*First of all we have the main() function which takes the main widget and show it on screen what is the main widget here? It is the runApp(MyApp));
-void main() {
-  runApp(MyApp());
-}
-Which is MyApp which is the main widget of all app and everything in the application will be under it
-The first thing is making sure that the flutter engine is ready before running the application how??  via
-عن طريق ال WidgetsFlutterBinding.ensureInitialized();
-Why?
-Because it is very important for the Sharedpreferences  اللي هو التخزين المحلي للبيانات
-And for Sqflite which is  قواعد البيانات اللي هو تخزين البيانات في داتا بيز
-And for any async processes before running the app runApp
-
-*/
-
-//A
-/*Now we’ll talk about Device Preview which is used for running the application without an emulator
-DevicePreview(
-  enabled: true,
-  builder: (context) => MyApp(),
-)
-بتنحط فوق ال myApp  و لازم يتم تفعيلها
-By setting enabled:true,
-*/
-
-//A
-/* الماتريال اب هو مستخدم ك ماتريال ديزاين لأي تطبيق فلاتر فبالتالي هو مسؤول عن ال
-theme (colors , fonts ) ,  و عن ال Routes  اللي هم شاشات التطبيق
-في  عنا  كمان قصة تحديد شاشة ك initial  اللي هي هتكون السبلاش
-و طبعا في كمان ال debug banner  اللي هي الاشارة الحمرا اللي على جنب الايميوليتور
--- طيب هلقيت بدنا نحدد الثيم تبع التطبيق بحيث اي سكافولد هيكون الثيم تبعها موحد مع باقي الواجهات
-طيب كيف احدد الثيم داتا هاي؟
-  theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-        fontFamily: 'Poppins',
-      ),
-      عن طريق ال theme  هيك بنقدر نحدد السواتش الاساسية لكل واجهات البرنامج
-      و قدرنا نحدد نوع الخط
--- طيب هلقيت عن طريق هاي الجملة هيك حددنا انه الشاشة الهوم تبعت الماتيريال اب هي السبلاششششششش
-        initialRoute: Routes.splash,
-او انها الانيشيال راوت يعني
-
--- بعد هيك احنا بنحدد شو هم الراوتس اللي عندي في التطبيق عن طريق اني احدد كل راوت في التطبيق
-  routes: {
-          Routes.splash: (_) => const SplashPage(),
-          Routes.login: (_) => const LoginScreen(),
-          Routes.signup: (_) => SignUp(),
-          Routes.home: (_) => const HomeScreen(),
-        },
-
-      طبعا لازم يكون عنا كلاس خاص جنب المين اسمه Routes
-*/
-
-//A
-/*
-بعد هيك بدنا نضيف شغلات
-اساسية للكيوبيت و للapi و لل shared preferences
-اول اشي هنضيف الشغلات اللي الها علاقة بالشيرد بريفرانسز
- هنعرف اوبجكت من الشيرد بريفرنسز
-  final prefs = await SharedPreferences.getInstance();
-  و نخزن قيمة البوليان تبع ال بريفز بحيث اتأكد هل اللوجين سكرين دخل اليوزر فيها الكريدينتالز كي تعته اللي هي بتسأل البريفرانسز هل المستخدم سجل دخول قبل كدا ولا لا
-  final hasLoggedIn = prefs.getBool(LoginScreen.userCredentialsKey) ?? false;
-  final initialRoute = hasLoggedIn ? Routes.home : Routes.splash;
-*/
