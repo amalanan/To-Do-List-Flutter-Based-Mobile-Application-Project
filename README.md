@@ -1,16 +1,21 @@
-# todolistgsg
+# 🧾 To-Do List Flutter Based Mobile Application (ToDoListGSG)
 
-A new Flutter project.
+A modern and responsive **Flutter mobile application** designed to help users manage their daily tasks efficiently.  
+This project integrates **local SQLite storage**, **RESTful API (DummyJSON)**, and **state management using Cubit (BLoC)**.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🚀 Features
 
-A few resources to get you started if this is your first Flutter project:
+✅ User Authentication (Login / Signup)  
+✅ Persistent Session using SharedPreferences  
+✅ Task Management (Add, Edit, Delete, Complete)  
+✅ Local Database (SQLite) with Offline Support  
+✅ Remote API Integration (https://dummyjson.com)  
+✅ Responsive UI with Flutter Widgets  
+✅ Logout and Auto Login  
+✅ Clean Architecture and Service Layer Separation  
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
