@@ -31,7 +31,7 @@ It includes **authentication, local + API integration, task management, and beau
 
 | Welcome | Sign Up | Login |
 |----------|----------|--------|
-| ![Welcome](assets/screenshots/Screenshot 2025-11-10 090315.png) | ![Sign Up](assets/screenshots/signup.png) | ![Login](assets/screenshots/login.png) |
+| ![Welcome](assets/screenshots/welcome.png) | ![Sign Up](assets/screenshots/signup.png) | ![Login](assets/screenshots/login.png) |
 
 | Dashboard (Home) | Tasks | Create / Edit Task |
 |------------------|-------|--------------------|
