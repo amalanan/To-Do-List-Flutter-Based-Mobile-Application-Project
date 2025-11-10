@@ -1,49 +1,57 @@
 # 📝 To-Do List Flutter Based Mobile Application Project
 
-This project is a **Flutter-based mobile To-Do List App** that allows users to manage their daily tasks efficiently.  
-It supports **user authentication, task creation, editing, and completion tracking**, with data stored both **locally (SQLite)** and synced with an **API**.
+This is a **Flutter-based mobile To-Do List App** built to help users manage their daily tasks easily and efficiently.  
+It includes **authentication, local + API integration, task management, and beautiful UI.**
 
 ---
 
 ## 🚀 Features
 
-✅ User Registration & Login (with API + local database)  
-✅ Create, Edit, and Delete Tasks  
-✅ Mark tasks as Completed or Pending  
-✅ Dashboard with statistics  
-✅ Persistent login using Session Service  
-✅ API integration with `https://dummyjson.com`
-
----
-
-## 📱 Screenshots
-
-| Home Screen | Tasks Screen | Profile Screen |
-|--------------|--------------|----------------|
-| ![Home](assets/screenshots/Screenshot%202025-11-10%20091414.png) | ![Tasks](assets/screenshots/logo1.jpg) | ![Profile](assets/screenshots/person.jpg) |
-
----
-
-## 🎥 Demo Video
-
-You can watch a short demo of the app here:  
-👉 [**Instagram Video Demo**](https://www.instagram.com/p/DQ2FvC1kinv/)
+✅ User registration and login (API + local SQLite)  
+✅ Create, edit, delete, and mark tasks as complete  
+✅ Dashboard showing completed and pending tasks  
+✅ Persistent login with Session Service  
+✅ Modern and responsive UI  
+✅ Integrated with [DummyJSON API](https://dummyjson.com)
 
 ---
 
 ## 🧠 Tech Stack
 
 - **Frontend:** Flutter  
-- **State Management:** Cubit / BLoC  
+- **State Management:** Cubit (BLoC)  
 - **Local Database:** SQLite  
 - **API:** DummyJSON  
-- **Backend Services:** Auth & Task management
+- **Backend:** Auth & Task endpoints  
+- **Language:** Dart  
 
 ---
 
-## ⚙️ Setup Instructions
+## 📱 App Screenshots
+
+| Welcome | Sign Up | Login |
+|----------|----------|--------|
+| ![Welcome](assets/screenshots/Screenshot 2025-11-10 090315.png) | ![Sign Up](assets/screenshots/signup.png) | ![Login](assets/screenshots/login.png) |
+
+| Dashboard (Home) | Tasks | Create / Edit Task |
+|------------------|-------|--------------------|
+| ![Home](assets/screenshots/home.png) | ![Tasks](assets/screenshots/tasks.png) | ![Create Edit](assets/screenshots/create_edit.png) |
+
+| Profile | Logout Dialog | App Logo |
+|----------|----------------|----------|
+| ![Profile](assets/screenshots/profile.png) | ![Logout](assets/screenshots/logout.png) | ![Logo](assets/screenshots/logo1.jpg) |
+
+---
+
+## 🎥 Demo Video
+
+Watch the full app demo here 👇  
+🎬 [**Instagram Video Demo**](https://www.instagram.com/p/DQ2FvC1kinv/)
+
+---
+
+## ⚙️ Installation & Setup
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/amalanan/To-Do-List-Flutter-Based-Mobile-Application-Project.git
-
