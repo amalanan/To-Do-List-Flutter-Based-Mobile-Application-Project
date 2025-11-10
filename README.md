@@ -31,15 +31,15 @@ It includes **authentication, local + API integration, task management, and beau
 
 | Welcome | Sign Up | Login |
 |----------|----------|--------|
-| ![Welcome](assets/screenshots/welcome.png) | ![Sign Up](assets/screenshots/signup.png) | ![Login](assets/screenshots/login.png) |
+| ![Welcome](assets/screenshots/welcome_screen.png) | ![Sign Up](assets/screenshots/signup_screen.png) | ![Login](assets/screenshots/login_screen.png) |
 
 | Dashboard (Home) | Tasks | Create / Edit Task |
 |------------------|-------|--------------------|
-| ![Home](assets/screenshots/home.png) | ![Tasks](assets/screenshots/tasks.png) | ![Create Edit](assets/screenshots/create_edit.png) |
+| ![Home](assets/screenshots/home_screen.png) | ![Tasks](assets/screenshots/tasks_screen.png) | ![Create Edit](assets/screenshots/create_edit_screen.png) |
 
 | Profile | Logout Dialog | App Logo |
 |----------|----------------|----------|
-| ![Profile](assets/screenshots/profile.png) | ![Logout](assets/screenshots/logout.png) | ![Logo](assets/screenshots/logo1.jpg) |
+| ![Profile](assets/screenshots/profile_screen.png) | ![Logout](assets/screenshots/logout_dialog.png) | ![Logo](assets/screenshots/logo1.jpg) |
 
 ---
 
